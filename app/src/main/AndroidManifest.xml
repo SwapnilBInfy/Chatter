@@ -16,6 +16,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".NewActivity"></activity>
+
+        <activity android:name=".GraphActivity">
+        </activity>
+
+
+        <activity android:name=".ChartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.CHART_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="org.achartengine.GraphicalActivity"></activity>
+
     </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
