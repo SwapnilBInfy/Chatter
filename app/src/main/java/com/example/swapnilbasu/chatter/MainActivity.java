@@ -72,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
             returnGraph(message);
         }
 
+        else if(message.matches("Get Time")){
+            sendAsyncTask(message);
+        }
+
         else {
             mimicOtherMessage(message.toUpperCase());
         }
@@ -86,6 +90,12 @@ public class MainActivity extends AppCompatActivity {
         String[] split = message.split(" ");
         com.example.swapnilbasu.chatter.ChatMessage chatMessage = new com.example.swapnilbasu.chatter.ChatMessage(message, true, true, split[0]);
         mAdapter.add(chatMessage);
+    }
+
+    private void sendAsyncTask(String message){
+        com.example.swapnilbasu.chatter.ChatMessage chatMessage = new com.example.swapnilbasu.chatter.ChatMessage(message, false, true);
+        mAdapter.add(chatMessage);
+
     }
 
 
