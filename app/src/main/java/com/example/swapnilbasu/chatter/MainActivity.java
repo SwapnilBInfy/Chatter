@@ -18,8 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText editMessage;
-    private DatabaseReference mDatabase;
+
 
     private ListView mListView;
     private Button mButtonSend;
@@ -51,10 +50,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
 //code for sending the message
         mButtonSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,10 +63,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendMessage(String message) {
-        com.example.swapnilbasu.chatter.ChatMessage chatMessage = new com.example.swapnilbasu.chatter.ChatMessage(message, true, false);
+        String[] split = message.split(" ");
+        ChatMessage chatMessage = new ChatMessage(message, true, false);
         mAdapter.add(chatMessage);
         //respond as Helloworld
-        mimicOtherMessage("HelloWorld");
+
+        if(split[1].matches("graph")) {
+            returnGraph(message);
+        }
+
+        else {
+            mimicOtherMessage(message.toUpperCase());
+        }
     }
 
     private void mimicOtherMessage(String message) {
@@ -79,23 +82,11 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.add(chatMessage);
     }
 
-    private void sendMessage() {
-        com.example.swapnilbasu.chatter.ChatMessage chatMessage = new com.example.swapnilbasu.chatter.ChatMessage(null, true, true);
-        mAdapter.add(chatMessage);
-
-        mimicOtherMessage();
-    }
-
-    private void mimicOtherMessage() {
-        com.example.swapnilbasu.chatter.ChatMessage chatMessage = new com.example.swapnilbasu.chatter.ChatMessage(null, false, true);
+    private void returnGraph(String message) {
+        String[] split = message.split(" ");
+        com.example.swapnilbasu.chatter.ChatMessage chatMessage = new com.example.swapnilbasu.chatter.ChatMessage(message, true, true, split[0]);
         mAdapter.add(chatMessage);
     }
 
-    public void sendButtonClicked(View view) {
-        final String messageValue = editMessage.getText().toString().trim();
-        if(!TextUtils.isEmpty(messageValue)){
-            final DatabaseReference newPost = mDatabase.push();
-            newPost.child("content").setValue(messageValue);
-        }
-    }
+
 }

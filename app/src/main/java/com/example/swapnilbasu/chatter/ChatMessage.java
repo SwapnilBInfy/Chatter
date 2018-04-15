@@ -3,12 +3,29 @@ package com.example.swapnilbasu.chatter;
 public class ChatMessage {
     private boolean isImage, isMine;
     private String content;
+    private String graphType;
+
+
+
 
     public ChatMessage(String message, boolean mine, boolean image) {
         content = message;
         isMine = mine;
         isImage = image;
+
+
     }
+
+    public ChatMessage(String message, boolean mine, boolean image, String thisGraphType) {
+        content = message;
+        isMine = mine;
+        isImage = image;
+        graphType = thisGraphType;
+
+
+    }
+
+
 
     public String getContent() {
         return content;
@@ -33,4 +50,10 @@ public class ChatMessage {
     public void setIsImage(boolean isImage) {
         this.isImage = isImage;
     }
+
+    public String getGraphType() {
+        return graphType;
+    }
+
+
 }
