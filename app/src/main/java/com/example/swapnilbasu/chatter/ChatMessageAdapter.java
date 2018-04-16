@@ -102,6 +102,8 @@ public class ChatMessageAdapter extends ArrayAdapter<com.example.swapnilbasu.cha
                 graphView.addSeries(series);
                 graphView.setTitle("Sample");
 
+
+
             }
 
 

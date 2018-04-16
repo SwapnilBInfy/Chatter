@@ -49,10 +49,16 @@ class MyAsyncTask extends AsyncTask<String,Void,String> {
 
             }
         }
-        return response;
+        String[] split = response.split(",");
+        String trim = split[0].replace("{", "");
+        String noLine = trim.replace("\n", "");
+        String complete = noLine.replace(" ","");
+
+        return complete;
     }
     @Override
     protected void onPostExecute(String jsonObject) {
+
         tv.setText(jsonObject);
     }
 

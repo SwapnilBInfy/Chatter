@@ -82,18 +82,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void mimicOtherMessage(String message) {
-        com.example.swapnilbasu.chatter.ChatMessage chatMessage = new com.example.swapnilbasu.chatter.ChatMessage(message, false, false);
+        ChatMessage chatMessage = new ChatMessage(message, false, false);
         mAdapter.add(chatMessage);
     }
 
     private void returnGraph(String message) {
         String[] split = message.split(" ");
-        com.example.swapnilbasu.chatter.ChatMessage chatMessage = new com.example.swapnilbasu.chatter.ChatMessage(message, true, true, split[0]);
+        ChatMessage chatMessage = new ChatMessage(message, true, true, split[0]);
         mAdapter.add(chatMessage);
     }
 
     private void sendAsyncTask(String message){
-        com.example.swapnilbasu.chatter.ChatMessage chatMessage = new com.example.swapnilbasu.chatter.ChatMessage(message, false, true);
+        ChatMessage chatMessage = new ChatMessage(message, false, true);
         mAdapter.add(chatMessage);
 
     }
