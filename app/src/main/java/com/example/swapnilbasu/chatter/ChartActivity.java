@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.example.swapnilbasu.chatter.BarGraph;
 import com.example.swapnilbasu.chatter.LineGraph;
 
 public class ChartActivity extends AppCompatActivity {

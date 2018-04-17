@@ -67,10 +67,43 @@ public class ChatMessageAdapter extends ArrayAdapter<com.example.swapnilbasu.cha
 
             String type = item.getGraphType();
 
+
             if (type.matches("bar") || type.matches("Bar")) {
 
+                String data = item.getPairs();
 
-                BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]{
+                String[] datapts = data.split(" ");
+
+                DataPoint[] thesePoints = new DataPoint[datapts.length];
+
+
+                for(int i = 0; i< datapts.length ; i++){
+
+                    String[] coord = datapts[i].split(",");
+                    double x = Integer.parseInt(coord[0]);
+                    double y = Integer.parseInt(coord[1]);
+
+                    thesePoints[i] = new DataPoint(x,y);
+
+                }
+
+                BarGraphSeries<DataPoint> series = new BarGraphSeries<>( thesePoints);
+
+                graphView.addSeries(series);
+                series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+                    @Override
+                    public int get(DataPoint data) {
+                        return Color.rgb((int) data.getX() * 255 / 4, (int) Math.abs(data.getY() * 255 / 6), 100);
+                    }
+                });
+
+                series.setSpacing(50);
+
+                // draw values on top
+                series.setDrawValuesOnTop(true);
+                series.setValuesOnTopColor(Color.RED);
+
+                /*BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]{
                         new DataPoint(0, -1),
                         new DataPoint(1, 5),
                         new DataPoint(2, 3),
@@ -90,19 +123,35 @@ public class ChatMessageAdapter extends ArrayAdapter<com.example.swapnilbasu.cha
 
                 // draw values on top
                 series.setDrawValuesOnTop(true);
-                series.setValuesOnTopColor(Color.RED);
+                series.setValuesOnTopColor(Color.RED);*/
+
+
+
+
+
 
             } else if (type.matches("line") || type.matches("Line")) {
 
-                LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
-                        new DataPoint(0, 1),
-                        new DataPoint(1, 5),
-                        new DataPoint(2, 3)
-                });
+                String data = item.getPairs();
+
+                String[] datapts = data.split(" ");
+
+                DataPoint[] thesePoints = new DataPoint[datapts.length];
+
+
+                for(int i = 0; i< datapts.length ; i++){
+
+                    String[] coord = datapts[i].split(",");
+                    double x = Integer.parseInt(coord[0]);
+                    double y = Integer.parseInt(coord[1]);
+
+                    thesePoints[i] = new DataPoint(x,y);
+
+                }
+
+                LineGraphSeries<DataPoint> series = new LineGraphSeries<>(thesePoints);
                 graphView.addSeries(series);
                 graphView.setTitle("Sample");
-
-
 
             }
 

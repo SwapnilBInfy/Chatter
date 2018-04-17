@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         mListView = (ListView) findViewById(R.id.listView);
         mButtonSend = (Button) findViewById(R.id.btn_send);
         mEditTextMessage = (EditText) findViewById(R.id.et_message);
@@ -79,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
         else {
             mimicOtherMessage(message.toUpperCase());
         }
+
+
+
     }
 
     private void mimicOtherMessage(String message) {
@@ -88,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void returnGraph(String message) {
         String[] split = message.split(" ");
-        ChatMessage chatMessage = new ChatMessage(message, true, true, split[0]);
+        String pairs = message.substring(message.indexOf('[')+1,message.indexOf(']'));
+        ChatMessage chatMessage = new ChatMessage(message, true, true, split[0], pairs);
         mAdapter.add(chatMessage);
     }
 
