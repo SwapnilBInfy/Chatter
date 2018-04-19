@@ -91,6 +91,9 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.add(chatMessage);
     }
 
+
+
+
     private void returnGraph(String message) {
         String[] split = message.split(" ");
         String pairs = message.substring(message.indexOf('[')+1,message.indexOf(']'));

@@ -10,7 +10,7 @@
     <me.himanshusoni.chatmessageview.ChatMessageView
         android:id="@+id/chatMessageView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="270dp"
         app:cmv_arrowGravity="start"
         app:cmv_arrowPosition="left"
         app:cmv_backgroundColor="#8800bcd4"
@@ -20,10 +20,9 @@
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph"
-            android:layout_width="170dp"
-            android:layout_height="105dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
     </me.himanshusoni.chatmessageview.ChatMessageView>
 
 </LinearLayout>

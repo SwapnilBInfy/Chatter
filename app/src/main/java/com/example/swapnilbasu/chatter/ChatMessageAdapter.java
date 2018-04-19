@@ -21,6 +21,8 @@ import org.achartengine.chart.ScatterChart;
 import org.achartengine.model.TimeSeries;
 import org.w3c.dom.Text;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ChatMessageAdapter extends ArrayAdapter<com.example.swapnilbasu.chatter.ChatMessage> {
@@ -75,21 +77,51 @@ public class ChatMessageAdapter extends ArrayAdapter<com.example.swapnilbasu.cha
                 String[] datapts = data.split(" ");
 
                 DataPoint[] thesePoints = new DataPoint[datapts.length];
+                double[] xVals = new double[datapts.length];
+                double[] yVals = new double[datapts.length];
 
 
                 for(int i = 0; i< datapts.length ; i++){
 
                     String[] coord = datapts[i].split(",");
                     double x = Integer.parseInt(coord[0]);
+
+                    xVals[i] = x;
+
                     double y = Integer.parseInt(coord[1]);
+                    yVals[i] = y;
 
                     thesePoints[i] = new DataPoint(x,y);
 
                 }
 
+                double xMax = getMax(xVals);
+                double xMin = getMin(xVals);
+                double yMax = getMax(yVals);
+                double yMin = getMin(yVals);
+
+
                 BarGraphSeries<DataPoint> series = new BarGraphSeries<>( thesePoints);
 
+
+
+                graphView.getViewport().setMinX(xMin-1);
+                graphView.getViewport().setMaxX(xMax+1);
+                graphView.getViewport().setMinY(yMin-1);
+                graphView.getViewport().setMaxY(yMax+1);
+
+                graphView.getViewport().setYAxisBoundsManual(true);
+                graphView.getViewport().setXAxisBoundsManual(true);
+
+                graphView.getViewport().setScalable(true);
+                graphView.getViewport().setScalableY(true);
+
+                graphView.getViewport().setScrollable(true); // enables horizontal scrolling
+                graphView.getViewport().setScrollableY(true);
+
                 graphView.addSeries(series);
+
+
                 series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
                     @Override
                     public int get(DataPoint data) {
@@ -98,36 +130,11 @@ public class ChatMessageAdapter extends ArrayAdapter<com.example.swapnilbasu.cha
                 });
 
                 series.setSpacing(50);
+
 
                 // draw values on top
                 series.setDrawValuesOnTop(true);
                 series.setValuesOnTopColor(Color.RED);
-
-                /*BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]{
-                        new DataPoint(0, -1),
-                        new DataPoint(1, 5),
-                        new DataPoint(2, 3),
-                        new DataPoint(3, 2),
-                        new DataPoint(4, 6)
-                });
-                graphView.addSeries(series);
-
-                series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
-                    @Override
-                    public int get(DataPoint data) {
-                        return Color.rgb((int) data.getX() * 255 / 4, (int) Math.abs(data.getY() * 255 / 6), 100);
-                    }
-                });
-
-                series.setSpacing(50);
-
-                // draw values on top
-                series.setDrawValuesOnTop(true);
-                series.setValuesOnTopColor(Color.RED);*/
-
-
-
-
 
 
             } else if (type.matches("line") || type.matches("Line")) {
@@ -137,20 +144,44 @@ public class ChatMessageAdapter extends ArrayAdapter<com.example.swapnilbasu.cha
                 String[] datapts = data.split(" ");
 
                 DataPoint[] thesePoints = new DataPoint[datapts.length];
+                double[] xVals = new double[datapts.length];
+                double[] yVals = new double[datapts.length];
 
 
                 for(int i = 0; i< datapts.length ; i++){
 
                     String[] coord = datapts[i].split(",");
                     double x = Integer.parseInt(coord[0]);
+                    xVals[i] = x;
                     double y = Integer.parseInt(coord[1]);
+                    yVals[i] = y;
+
 
                     thesePoints[i] = new DataPoint(x,y);
 
                 }
+                double xMax = getMax(xVals);
+                double xMin = getMin(xVals);
+                double yMax = getMax(yVals);
+                double yMin = getMin(yVals);
 
                 LineGraphSeries<DataPoint> series = new LineGraphSeries<>(thesePoints);
+
+
+                graphView.getViewport().setMinX(xMin-1);
+                graphView.getViewport().setMaxX(xMax+1);
+                graphView.getViewport().setMinY(yMin-1);
+                graphView.getViewport().setMaxY(yMax+1);
+
+                graphView.getViewport().setScalable(true);
+                graphView.getViewport().setScalableY(true);
+
+                graphView.getViewport().setScrollable(true); // enables horizontal scrolling
+                graphView.getViewport().setScrollableY(true);
+
                 graphView.addSeries(series);
+
+
                 graphView.setTitle("Sample");
 
             }
@@ -167,5 +198,25 @@ public class ChatMessageAdapter extends ArrayAdapter<com.example.swapnilbasu.cha
             }
         });
         return convertView;
+    }
+
+    public static double getMax(double[] inputArray){
+        double maxValue = inputArray[0];
+        for(int i=1;i < inputArray.length;i++){
+            if(inputArray[i] > maxValue){
+                maxValue = inputArray[i];
+            }
+        }
+        return maxValue;
+    }
+
+    public static double getMin(double[] inputArray){
+        double minValue = inputArray[0];
+        for(int i=1;i<inputArray.length;i++){
+            if(inputArray[i] < minValue){
+                minValue = inputArray[i];
+            }
+        }
+        return minValue;
     }
 }
