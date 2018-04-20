@@ -16,7 +16,7 @@ public class BarGraph {
 
     public Intent getIntent(Context context){
         //data 1
-        int[] y = {124,135,443,456,234,123,342,134,123,643, 234, 274};
+        int[] y = {124,135,443,456,234,234, 123,342,134,123,643, 234, 274};
 
         CategorySeries series = new CategorySeries("Demo Bar Graph 1");
 
