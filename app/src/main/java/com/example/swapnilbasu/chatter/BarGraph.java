@@ -24,7 +24,7 @@ public class BarGraph {
             series.add("Bar "+(i+1), y[i]);
         }
         //Data 2
-        int[] y2 = {224, 235,243,256, 234,223,242,234,223,243,234,275};
+        int[] y2 = {224, 235,243,256, 234,223,242,234,223,243,234,275,35,36,36};
 
         CategorySeries series2 = new CategorySeries("Demo Bar Graph 2");
 
